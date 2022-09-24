@@ -6,6 +6,10 @@
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
+void processInput(GLFWwindow* hWindow);
+
+
+
 int main() {
 
 	//1- init window context
@@ -40,6 +44,11 @@ int main() {
 
 	while (!glfwWindowShouldClose(window))
 	{
+		processInput(window);
+
+		glClearColor(0.1f, 0.3f, 0.2f, 1.0f);	//Arka plan renk
+		glClear(GL_COLOR_BUFFER_BIT);
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
@@ -51,4 +60,10 @@ int main() {
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
+}
+
+void processInput(GLFWwindow* hWindow) {
+
+	if (glfwGetKey(hWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		glfwSetWindowShouldClose(hWindow, true);
 }
